@@ -15,7 +15,7 @@ services:
     env_file: .env
     volumes:
       - kittygram_final_static_volume:/backend_static/
-      - kittygram_media:/app/media/
+      - kittygram_media:/media/
   frontend:
     env_file: .env
     build: ./frontend/
@@ -29,4 +29,4 @@ services:
       - 9000:80
     volumes:
       - kittygram_final_static_volume:/static
-      - kittygram_media:/app/media/
+      - kittygram_media:/media/
