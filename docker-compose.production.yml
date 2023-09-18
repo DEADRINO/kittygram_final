@@ -19,14 +19,14 @@ services:
   frontend:
     image: deadrino/kittygram_frontend  # Качаем с Docker Hub
     env_file: .env
-    command: cp -r /app/build/. /frontend_static/
+    command: cp -r /app/build/. /static/
     volumes:
       - static:/static
   gateway:
     image: deadrino/kittygram_gateway  # Качаем с Docker Hub
     env_file: .env
+    ports:
+      - 9000:80
     volumes:
       - static:/static/
       - media:/app/media/
-    ports:
-      - 9000:80
