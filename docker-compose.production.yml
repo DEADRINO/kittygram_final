@@ -14,7 +14,7 @@ services:
     image: deadrino/kittygram_backend
     env_file: .env
     volumes:
-      - kittygram_static:/backend_static/
+      - static:/backend_static/
       - media:/app/media/
   frontend:
     image: deadrino/kittygram_frontend  # Качаем с Docker Hub
@@ -28,5 +28,5 @@ services:
     ports:
       - 9000:80
     volumes:
-      - kittygram_static:/static/
+      - static:/static/
       - media:/app/media/
