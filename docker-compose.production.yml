@@ -1,33 +1,33 @@
 version: '3'
 
 volumes:
-  kittygram_final_pg_data_production:
-  kittygram_final_static_volume:
-  kittygram_media:
+  pg_data_production:
+  static_volume:
+  media:
 
 services:
   db:
     image: postgres:13.10
     env_file: .env
     volumes:
-      - kittygram_final_pg_data_production:/var/lib/postgresql/data
+      - pg_data_production:/var/lib/postgresql/data
   backend:
     image: deadrino/kittygram_backend
     env_file: .env
     volumes:
-      - kittygram_final_static_volume:/backend_static/
-      - kittygram_media:/media/
+      - static_volume:/backend_static/
+      - media:/media/
   frontend:
     image: deadrino/kittygram_frontend  # Качаем с Docker Hub
     env_file: .env
     command: cp -r /app/build/. /static/
     volumes:
-      - kittygram_final_static_volume:/static/
+      - static_volume:/static/
   gateway:
     image: deadrino/kittygram_gateway  # Качаем с Docker Hub
     env_file: .env
     ports:
       - 9000:80
     volumes:
-      - kittygram_final_static_volume:/static/
-      - kittygram_media:/media/
+      - static_volume:/static/
+      - media:/media/
