@@ -9,24 +9,24 @@ services:
     image: postgres:13.10
     env_file: .env
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - pg_data_production:/var/lib/postgresql/data
   backend:
     image: deadrino/kittygram_backend
     env_file: .env
     volumes:
-      - static:/backend_static/
+      - kittygram_static:/backend_static/
       - media:/app/media/
   frontend:
     image: deadrino/kittygram_frontend  # Качаем с Docker Hub
     env_file: .env
     command: cp -r /app/build/. /static/
     volumes:
-      - static:/static/
+      - kittygram_static:/static/
   gateway:
     image: deadrino/kittygram_gateway  # Качаем с Docker Hub
     env_file: .env
     ports:
       - 9000:80
     volumes:
-      - static:/static/
+      - kittygram_static:/static/
       - media:/app/media/
