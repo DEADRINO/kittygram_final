@@ -23,6 +23,7 @@ services:
     volumes:
       - kittygram_static:/static
   gateway:
+    needs: backend
     build: ./nginx/
     env_file: .env
     ports:
