@@ -2,7 +2,7 @@ version: '3'
 
 volumes:
   pg_data:
-  kittygram_static:
+  static:
   media:
 
 services:
@@ -14,14 +14,14 @@ services:
     build: ./backend/
     env_file: .env
     volumes:
-      - kittygram_static:/backend_static/
-      - media:/media/cats/image/
+      - static:/backend_static/
+      - media:/media/
   frontend:
     env_file: .env
     build: ./frontend/
     command: cp -r /app/build/. /static/
     volumes:
-      - kittygram_static:/static
+      - static:/static
   gateway:
     depеnds on: backend
     build: ./nginx/
@@ -29,5 +29,5 @@ services:
     ports:
       - 9000:80
     volumes:
-      - kittygram_static:/static
-      - media:/media/cats/image/
+      - static:/static
+      - media:/media/
